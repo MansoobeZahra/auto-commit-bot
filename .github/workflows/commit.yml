@@ -2,8 +2,11 @@ name: Daily Auto Commit
 
 on:
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '0 3 * * *'  # Every day at 3AM UTC
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   auto-commit:

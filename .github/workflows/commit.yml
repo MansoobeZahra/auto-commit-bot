@@ -25,8 +25,8 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "🤖 Auto daily commit" || echo "No changes"
-          git push
+           git config --global user.name "Mansoob E Zehra"
+           git config --global user.email "mansoobezehra@gmail.com"  #b
+           git add .
+           git commit -F message.txt || echo "No changes"
+           git push

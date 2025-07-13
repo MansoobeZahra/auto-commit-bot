@@ -2,7 +2,7 @@ name: Daily Auto Commit
 
 on:
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '0 3 * * *'  # every day at 3AM UTC
   workflow_dispatch:
 
 permissions:
@@ -11,20 +11,28 @@ permissions:
 jobs:
   auto-commit:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+    - name: Checkout repo
+      uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
+    - name: Update commit counter
+      run: |
+        FILE="commit_count.md"
+        if [ ! -f "$FILE" ]; then
+          echo "Commit count: 1" > "$FILE"
+        else
+          CURRENT_COUNT=$(grep -oP 'Commit count: \K\d+' "$FILE")
+          NEXT_COUNT=$((CURRENT_COUNT + 1))
+          echo "Commit count: $NEXT_COUNT" > "$FILE"
+        fi
 
-      - name: Run Python Script
-        run: python autocommit.py
-
-      - name: Auto Commit
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: Commit from workflow
-          commit_user_name: Mansoob E Zehra
-          commit_user_email: 149682728+MansoobeZahra@users.noreply.github.com
+    - name: Commit and push
+      run: |
+        git config --global user.name "Mansoob E Zehra"
+        git config --global user.email "149682728+MansoobeZahra@users.noreply.github.com"
+        git add commit_count.md
+        git commit -m "Daily auto commit — count updated"
+        git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/MansoobeZahra/auto-commit-bot.git
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

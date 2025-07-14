@@ -2,7 +2,7 @@ name: Daily Auto Commit
 
 on:
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '0 3 * * *'  # runs daily at 3 AM UTC
   workflow_dispatch:
 
 permissions:
@@ -11,8 +11,12 @@ permissions:
 jobs:
   auto-commit:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -22,13 +26,13 @@ jobs:
       - name: Run Python Script
         run: python autocommit.py
 
-      - name: Auto Commit
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: Commit from workflow
-          commit_user_name: Mansoob E Zehra
-<<<<<<< HEAD
-          commit_user_email: 149682728+MansoobeZahra@users.noreply.github.com
-=======
-          commit_user_email: 149682728+MansoobeZahra@users.noreply.github.com
->>>>>>> eb04db2cb0a27ed4afda3bc63b50f2a0470ec7c1
+      - name: Show Git Diff
+        run: git diff --stat || true
+
+      - name: Manual Commit and Push
+        run: |
+          git config user.name "Mansoob E Zehra"
+          git config user.email "149682728+MansoobeZahra@users.noreply.github.com"
+          git add .
+          git commit -m "Daily auto commit from workflow" || echo "No changes to commit"
+          git push

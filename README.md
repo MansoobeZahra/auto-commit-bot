@@ -5,7 +5,7 @@ It’s designed to Keep your contribution graph green
 
 # Functionalities #
 -  i added customizable commit messages
--  It makes 2 commits per day and 5 on special day (my lucky day is Wednesdays!)
+-  It makes 7 commits per day and 12 on special day (my lucky day is Wednesdays!)
 -  I've kept the commit log tidy by trimming it to the last 50 entries
 # - In short it just generates random commits #
 ##  Files Included
@@ -14,7 +14,6 @@ It’s designed to Keep your contribution graph green
 |------|---------|
 | `autocommit.py` | Generates random commit messages to data.txt |
 | `data.txt` | Tracks each commit |
-| `message.txt` | Commit message used in run |
 | `.github/workflows/commit.yml` | GitHub Actions workflow |
 
 ---
@@ -23,8 +22,7 @@ It’s designed to Keep your contribution graph green
 
 - **Every day at 3 AM UTC**, GitHub Actions triggers the `autocommit.py` script.
 - The script:
-  - Adds 2–5 entries in `data.txt`
-  - Chooses a random message and stores it in `message.txt`
+  - Adds 7-12 entries in `data.txt`
 - The action commits the update with the selected message.
 - To keep it clean the log is trimmed to the **last 50 commits only** to keep the file clean.
 

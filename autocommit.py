@@ -6,6 +6,7 @@ filename = "data.txt"
 today = datetime.datetime.now()
 day_of_week = today.strftime('%A')
 
+<<<<<<< HEAD
 commit_count = 5 if day_of_week == "Wednesday" else 2
 messages = [
     "Refactored the universe ",
@@ -26,10 +27,14 @@ messages = [
     "Commit #{i+1} - because the code is never done",
     "Commit #{i+1} - because I have to keep up appearances",
 ]
+=======
+commit_count = 5 if day_of_week == "Wednesday" else 1  # at least 1
+>>>>>>> eb04db2cb0a27ed4afda3bc63b50f2a0470ec7c1
 
 for i in range(commit_count):
     with open(filename, "a") as f:
         f.write(f"\nAuto commit #{i+1} on {today.strftime('%Y-%m-%d %H:%M:%S')}")
+<<<<<<< HEAD
     with open("message.txt", "w") as msg:
         msg.write(random.choice(messages).replace("{i+1}", str(i+1)))
     time.sleep(random.uniform(0.5, 1.5))
@@ -37,3 +42,14 @@ for i in range(commit_count):
 lines = open(filename).readlines()
 # Keep last 50 commits only
 open(filename, "w").writelines(lines[-50:])
+=======
+
+    # Optional: add delay if multiple commits
+    time.sleep(random.uniform(0.2, 0.5))
+
+# Trim file to last 50 lines to avoid bloating
+with open(filename, "r") as f:
+    lines = f.readlines()
+with open(filename, "w") as f:
+    f.writelines(lines[-50:])
+>>>>>>> eb04db2cb0a27ed4afda3bc63b50f2a0470ec7c1

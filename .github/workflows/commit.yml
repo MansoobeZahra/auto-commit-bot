@@ -27,4 +27,8 @@ jobs:
         with:
           commit_message: Commit from workflow
           commit_user_name: Mansoob E Zehra
+<<<<<<< HEAD
           commit_user_email: 149682728+MansoobeZahra@users.noreply.github.com
+=======
+          commit_user_email: 149682728+MansoobeZahra@users.noreply.github.com
+>>>>>>> eb04db2cb0a27ed4afda3bc63b50f2a0470ec7c1
